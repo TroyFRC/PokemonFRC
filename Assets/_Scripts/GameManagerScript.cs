@@ -9,21 +9,21 @@ public class GameManagerScript : MonoBehaviour {
 	public Button[] selectMoveButtons;
 
 	public PokemonScript player1, player2;
-	private HashSet<Move> player2AppliedMoves, player1AppliedMoves;
+	private List<Effect> player2AppliedMoves, player1AppliedMoves;
 	private int player1SelectedMove, player2SelectedMove;
 
 	private enum GameState{
 		Player1StartSelect, Player1Selecting, Player1Move, Player1Recoil, Player1HealthChange,
 		Player2StartSelect, Player2Selecting, Player2Move, Player2Recoil, Player2HealthChange,
-		EnvironmentChange //when the guy is no longer grappled.
+		EnvironmentChange //when the guy is no longer grappled, also applies Effects
 	}
 	private GameState currState;
 
 	// Use this for initialization
 	void Start () {
 		//Set up the applied Moves lists
-		player1AppliedMoves = new HashSet<Move> ();
-		player2AppliedMoves = new HashSet<Move> ();
+		player1AppliedMoves = new List<Effect> ();
+		player2AppliedMoves = new List<Effect> ();
 
 		//both players have not selected a move
 		player1SelectedMove = player2SelectedMove = -1;
@@ -86,6 +86,10 @@ public class GameManagerScript : MonoBehaviour {
 			//animator controller's state machine is at resting.
 
 			break;
+		case GameState.Player2Recoil:
+			//This would run the player2 hit animation.
+			break;
+		
 		}
 	}
 
