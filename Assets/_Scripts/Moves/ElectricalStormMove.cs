@@ -5,7 +5,7 @@ using System.Collections;
 public class ElectricalStormMove : Move {
 	
 	public override Effect ApplyMove (PokemonScript enemy, PokemonScript ours){
-		enemy.hp -= (int)(0.5 * ours.attackStat); 
+		enemy.hp -= (int)(0.5 * ours.getAttackStat()); 
 		return null;
 	}
 

@@ -2,13 +2,21 @@
 using System.Collections;
 
 [System.Serializable]
-public class ThrowCubeMove : Move {
+public class RevEngine : Move{
+
 	public override Effect ApplyMove (PokemonScript enemy, PokemonScript ours){
-		enemy.hp -= (int)(0.5 * ours.getAttackStat()); 
+		
+		// +5 speed for 2 turns ;;;;;;
 		return null;
+
+	}
+
+	public override string getMostRecentMoveText(){
+		return "TODO";
 	}
 
 	public override string GetName(){
-		return "Throw Cube";
+		return "Reve Engine";
 	}
 }
+

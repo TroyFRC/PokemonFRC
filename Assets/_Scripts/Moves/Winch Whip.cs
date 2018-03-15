@@ -2,13 +2,14 @@
 using System.Collections;
 
 [System.Serializable]
-public class ThrowCubeMove : Move {
+public class WinchWhip : Move{
 	public override Effect ApplyMove (PokemonScript enemy, PokemonScript ours){
-		enemy.hp -= (int)(0.5 * ours.getAttackStat()); 
+		enemy.hp -= (int) (0.4*ours.getAttackStat());
 		return null;
 	}
+		
 
 	public override string GetName(){
-		return "Throw Cube";
+		return "Winch Whip";
 	}
 }

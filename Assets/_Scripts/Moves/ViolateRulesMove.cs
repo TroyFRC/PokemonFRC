@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class ViolateRulesMove : Move{
 	public override Effect ApplyMove (PokemonScript enemy, PokemonScript ours)
 	{

@@ -12,6 +12,7 @@ public class PokemonScript : MonoBehaviour {
 		Autonomous = 4,
 		Tilted = 8
 	}
+			
     
     public Move[] history;
 	public Move[] moves;
@@ -19,12 +20,17 @@ public class PokemonScript : MonoBehaviour {
 	public int hp;
 
 	public int MAX_HEALTH;
-	public int attackStat;
+	private int attackStat;
 	public int speedStat;
+	public string pokemonName;
 
 
-	void Start () {
+	void Start () {}
+
+	public void Init(){
 		hp = MAX_HEALTH;
+		moves = GetComponents<Move> ();
+		Debug.Log (moves.Length);
 	}
 
 
@@ -41,5 +47,17 @@ public class PokemonScript : MonoBehaviour {
 		//which is only true if st is inside status.
 		return (status & ~st) != status;
     }
+		
+
+	//getters and setters for attackStat
+	public int getAttackStat(){
+		if (isStatus (Status.Grappled))
+			return 20 + attackStat;    //TODO should this have max??
+		return attackStat;
+	}
+
+	public void setAttackStat(int a){
+		attackStat = a;
+	}
 		
 }

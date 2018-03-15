@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour {
 
+	public static string player1PokemonSelection, player2PokemonSelection;
+
 	public Canvas canvas;
 	public Button[] selectMoveButtons;
 
@@ -21,6 +23,13 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//set up Player 1 and player 2 using strings passed from previous scene
+		CreatePokemonFromName(1, player1PokemonSelection);
+		CreatePokemonFromName (2, player2PokemonSelection);
+		player1.Init ();
+		player2.Init ();
+
+
 		//Set up the applied Moves lists
 		player1AppliedMoves = new List<Effect> ();
 		player2AppliedMoves = new List<Effect> ();
@@ -38,6 +47,45 @@ public class GameManagerScript : MonoBehaviour {
 
 		//show UI for player 1
 		showMoves (1);
+	}
+
+	void CreatePokemonFromName(int playerNumber, string pokemonName){
+		GameObject go = GameObject.Find ("Player" + playerNumber);
+		PokemonScript ps = go.GetComponent<PokemonScript> ();
+		Debug.Log (ps);
+		//kills all moves that exist in it
+		Move[] moves = go.GetComponents<Move> ();
+		foreach (Move m in moves) {
+			Destroy (m);
+		}
+
+
+		switch (pokemonName) {
+		case "Celebi":
+			ps.pokemonName = "Celebi";
+			ps.MAX_HEALTH = 30;
+			ps.speedStat = 90;
+			ps.setAttackStat(85);
+			go.AddComponent<ClawGrab> ();
+			go.AddComponent<ThrowCubeMove> ();
+			go.AddComponent<FlankManeuver> ();
+			go.AddComponent<WinchWhip> ();
+			go.AddComponent<RevEngine> ();
+			go.AddComponent<AllNatural> ();
+			break;
+		case "Gardevoir":
+			ps.pokemonName = "Gardevoir";
+			ps.MAX_HEALTH = 150;
+			ps.speedStat = 60;
+			ps.setAttackStat(80);
+			go.AddComponent<FlankManeuver> ();
+			go.AddComponent<Disable> ();
+			go.AddComponent<SpinAttack> ();
+			go.AddComponent<WinchWhip> ();
+			go.AddComponent<Riposte> ();
+			go.AddComponent<Heal> ();
+			break;
+		}
 	}
 	
 	// Update is called once per frame
