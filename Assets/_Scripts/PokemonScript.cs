@@ -24,6 +24,7 @@ public class PokemonScript : MonoBehaviour {
 	public int speedStat;
 	public string pokemonName;
 
+	private Animator anim;
 
 	void Start () {}
 
@@ -31,6 +32,7 @@ public class PokemonScript : MonoBehaviour {
 		hp = MAX_HEALTH;
 		moves = GetComponents<Move> ();
 		Debug.Log (moves.Length);
+		anim = GetComponent<Animator> ();
 	}
 
 
@@ -60,4 +62,12 @@ public class PokemonScript : MonoBehaviour {
 		attackStat = a;
 	}
 		
+
+	public void animateAttack(){
+		anim.SetTrigger ("Attack");
+	}
+
+	public void animateRecoil(){
+		anim.SetTrigger ("Recoil");
+	}
 }
